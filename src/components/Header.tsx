@@ -69,8 +69,8 @@ export const Header: React.FC<Props> = ({
           {/* Brand & Normative tags */}
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-zinc-900 text-white flex items-center justify-center font-mono font-bold text-sm shadow-xs">
-                C<sub className="text-[9px] -mb-1">nom</sub>
+              <div className="w-8 h-8 rounded-md bg-zinc-100 text-zinc-900 border border-zinc-300 flex items-center justify-center font-mono font-bold text-xs shadow-2xs">
+                C<sub className="text-[9px] -mb-0.5">nom</sub>
               </div>
               <div>
                 <div className="flex items-center gap-2">

@@ -65,8 +65,8 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                 onClick={() => updateField('typeElement', 'voile')}
                 className={`py-2 px-3 text-xs font-semibold rounded-md border text-center transition-all ${
                   element.typeElement === 'voile'
-                    ? 'bg-zinc-900 text-white border-zinc-900 shadow-2xs'
-                    : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border-zinc-200'
+                    ? 'bg-zinc-100 text-zinc-950 border-zinc-400 shadow-2xs'
+                    : 'bg-white hover:bg-zinc-50 text-zinc-600 border-zinc-200'
                 }`}
               >
                 Voile / Poteau / Poutre
@@ -76,8 +76,8 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                 onClick={() => updateField('typeElement', 'dalle')}
                 className={`py-2 px-3 text-xs font-semibold rounded-md border text-center transition-all ${
                   element.typeElement === 'dalle'
-                    ? 'bg-zinc-900 text-white border-zinc-900 shadow-2xs'
-                    : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border-zinc-200'
+                    ? 'bg-zinc-100 text-zinc-950 border-zinc-400 shadow-2xs'
+                    : 'bg-white hover:bg-zinc-50 text-zinc-600 border-zinc-200'
                 }`}
               >
                 Dalle (-1 classe struct.)
@@ -96,8 +96,8 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                 onClick={() => updateField('dureeUtilisationProjet', 50)}
                 className={`py-2 px-3 text-xs font-semibold rounded-md border text-center transition-all ${
                   element.dureeUtilisationProjet === 50
-                    ? 'bg-zinc-900 text-white border-zinc-900 shadow-2xs'
-                    : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border-zinc-200'
+                    ? 'bg-zinc-100 text-zinc-950 border-zinc-400 shadow-2xs'
+                    : 'bg-white hover:bg-zinc-50 text-zinc-600 border-zinc-200'
                 }`}
               >
                 50 ans (Standard)
@@ -107,8 +107,8 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                 onClick={() => updateField('dureeUtilisationProjet', 100)}
                 className={`py-2 px-3 text-xs font-semibold rounded-md border text-center transition-all ${
                   element.dureeUtilisationProjet === 100
-                    ? 'bg-zinc-900 text-white border-zinc-900 shadow-2xs'
-                    : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border-zinc-200'
+                    ? 'bg-zinc-100 text-zinc-950 border-zinc-400 shadow-2xs'
+                    : 'bg-white hover:bg-zinc-50 text-zinc-600 border-zinc-200'
                 }`}
               >
                 100 ans (+2 classes)
@@ -130,8 +130,8 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                     onClick={() => updateField('diametreBarreMm', d)}
                     className={`px-2.5 py-1 text-xs font-mono rounded border transition-colors ${
                       element.diametreBarreMm === d
-                        ? 'bg-zinc-900 text-white border-zinc-900 font-bold'
-                        : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border-zinc-200'
+                        ? 'bg-zinc-100 text-zinc-950 border-zinc-400 font-bold shadow-2xs'
+                        : 'bg-white hover:bg-zinc-50 text-zinc-600 border-zinc-200'
                     }`}
                   >
                     {d}
@@ -182,8 +182,8 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                 onClick={() => updateField('deltaCDevMm', 10)}
                 className={`py-1.5 px-3 text-xs font-mono rounded border text-center transition-all ${
                   element.deltaCDevMm === 10
-                    ? 'bg-zinc-900 text-white border-zinc-900 font-bold'
-                    : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border-zinc-200'
+                    ? 'bg-zinc-100 text-zinc-950 border-zinc-400 font-bold shadow-2xs'
+                    : 'bg-white hover:bg-zinc-50 text-zinc-600 border-zinc-200'
                 }`}
               >
                 10 mm (Recommandé)
@@ -193,8 +193,8 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                 onClick={() => updateField('deltaCDevMm', 5)}
                 className={`py-1.5 px-3 text-xs font-mono rounded border text-center transition-all ${
                   element.deltaCDevMm === 5
-                    ? 'bg-zinc-900 text-white border-zinc-900 font-bold'
-                    : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border-zinc-200'
+                    ? 'bg-zinc-100 text-zinc-950 border-zinc-400 font-bold shadow-2xs'
+                    : 'bg-white hover:bg-zinc-50 text-zinc-600 border-zinc-200'
                 }`}
               >
                 5 mm (Contrôle continu)
@@ -270,8 +270,8 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                 key={item.id}
                 className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
                   isSelected
-                    ? 'bg-sky-50/70 border-sky-400 ring-1 ring-sky-400/40 text-zinc-900'
-                    : 'bg-zinc-50/50 hover:bg-zinc-100/70 border-zinc-200 text-zinc-700'
+                    ? 'bg-zinc-50 border-zinc-400 ring-1 ring-zinc-400/20 text-zinc-900'
+                    : 'bg-white hover:bg-zinc-50/70 border-zinc-200 text-zinc-700'
                 }`}
               >
                 <input
@@ -280,12 +280,12 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                   value={item.id}
                   checked={isSelected}
                   onChange={() => updateReponse('ambianceXC', item.id)}
-                  className="mt-1 text-zinc-900 focus:ring-zinc-900"
+                  className="mt-1 text-zinc-700 focus:ring-zinc-500"
                 />
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-zinc-900">{item.titre}</span>
-                    <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-zinc-200 text-zinc-800">
+                    <span className="text-xs font-semibold text-zinc-900">{item.titre}</span>
+                    <span className="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-zinc-100 text-zinc-800 border border-zinc-200">
                       {item.classe}
                     </span>
                   </div>
@@ -301,7 +301,7 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
       <section className="bg-white border border-zinc-200 rounded-lg p-5">
         <div className="flex items-center justify-between mb-3 pb-3 border-b border-zinc-100">
           <div className="flex items-center gap-2">
-            <ShieldAlert className="w-4 h-4 text-amber-600" />
+            <ShieldAlert className="w-4 h-4 text-zinc-600" />
             <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-900">
               3. Chlorures non marins (Classe XD)
             </h3>
@@ -313,7 +313,7 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
               onChange={(e) => updateReponse('concerneParChlorures', e.target.checked)}
               className="sr-only peer"
             />
-            <div className="w-9 h-5 bg-zinc-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-zinc-900"></div>
+            <div className="w-9 h-5 bg-zinc-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-zinc-700"></div>
             <span className="ml-2 text-xs font-medium text-zinc-700">
               {element.reponses.concerneParChlorures ? 'Exposé' : 'Non concerné'}
             </span>
@@ -323,19 +323,19 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
         {element.reponses.concerneParChlorures ? (
           <div className="space-y-4 pt-1 animate-in fade-in duration-150">
             {/* Application directe vs projections */}
-            <div className="p-3 bg-amber-50/50 border border-amber-200 rounded-lg">
+            <div className="p-3 bg-zinc-50 border border-zinc-200 rounded-lg">
               <label className="flex items-start gap-2.5 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={element.reponses.applicationDirecteSelSurFace}
                   onChange={(e) => updateReponse('applicationDirecteSelSurFace', e.target.checked)}
-                  className="mt-0.5 rounded border-amber-400 text-amber-800 focus:ring-amber-500"
+                  className="mt-0.5 rounded border-zinc-300 text-zinc-700 focus:ring-zinc-500"
                 />
                 <div>
-                  <span className="text-xs font-bold text-amber-950">
+                  <span className="text-xs font-semibold text-zinc-900">
                     Application directe d’agents de déverglaçage sur la face (dalles de circulation, rampes, marches)
                   </span>
-                  <p className="text-[11px] text-amber-800 mt-0.5">
+                  <p className="text-[11px] text-zinc-600 mt-0.5">
                     Concerne les surfaces recevant directement les sels de déverglaçage ou les véhicules enneigés/salés en stagnation (produit automatiquement <strong className="font-mono font-semibold">XD3</strong>).
                   </p>
                 </div>
@@ -401,7 +401,7 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
       <section className="bg-white border border-zinc-200 rounded-lg p-5">
         <div className="flex items-center justify-between mb-3 pb-3 border-b border-zinc-100">
           <div className="flex items-center gap-2">
-            <Snowflake className="w-4 h-4 text-cyan-600" />
+            <Snowflake className="w-4 h-4 text-zinc-600" />
             <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-900">
               4. Attaque Gel / Dégel (Classe XF)
             </h3>
@@ -413,7 +413,7 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
               onChange={(e) => updateReponse('exposeAuGel', e.target.checked)}
               className="sr-only peer"
             />
-            <div className="w-9 h-5 bg-zinc-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-zinc-900"></div>
+            <div className="w-9 h-5 bg-zinc-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-zinc-700"></div>
             <span className="ml-2 text-xs font-medium text-zinc-700">
               {element.reponses.exposeAuGel ? 'Exposé au gel' : 'Hors gel'}
             </span>
@@ -433,8 +433,8 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                     onClick={() => updateReponse('zoneGel', 'faible_modere')}
                     className={`py-1.5 px-3 text-xs font-semibold rounded border text-center transition-all ${
                       element.reponses.zoneGel === 'faible_modere'
-                        ? 'bg-zinc-900 text-white border-zinc-900'
-                        : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border-zinc-200'
+                        ? 'bg-zinc-100 text-zinc-950 font-semibold border-zinc-400'
+                        : 'bg-white hover:bg-zinc-50 text-zinc-600 border-zinc-200'
                     }`}
                   >
                     Gel faible / modéré
@@ -444,8 +444,8 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                     onClick={() => updateReponse('zoneGel', 'severe')}
                     className={`py-1.5 px-3 text-xs font-semibold rounded border text-center transition-all ${
                       element.reponses.zoneGel === 'severe'
-                        ? 'bg-zinc-900 text-white border-zinc-900'
-                        : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border-zinc-200'
+                        ? 'bg-zinc-100 text-zinc-950 font-semibold border-zinc-400'
+                        : 'bg-white hover:bg-zinc-50 text-zinc-600 border-zinc-200'
                     }`}
                   >
                     Gel sévère
@@ -459,7 +459,7 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                     type="checkbox"
                     checked={element.reponses.presenceAgentDeverglacage}
                     onChange={(e) => updateReponse('presenceAgentDeverglacage', e.target.checked)}
-                    className="rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900"
+                    className="rounded border-zinc-300 text-zinc-700 focus:ring-zinc-500"
                   />
                   <span className="text-xs text-zinc-800">
                     Présence d'agents de déverglaçage (XF2 / XF4)
@@ -471,7 +471,7 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
                     type="checkbox"
                     checked={element.reponses.saturationForteEau}
                     onChange={(e) => updateReponse('saturationForteEau', e.target.checked)}
-                    className="rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900"
+                    className="rounded border-zinc-300 text-zinc-700 focus:ring-zinc-500"
                   />
                   <span className="text-xs text-zinc-800">
                     Forte saturation en eau (surfaces horizontales / dalles stagnantes)
@@ -491,7 +491,7 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
       <section className="bg-white border border-zinc-200 rounded-lg p-5">
         <div className="flex items-center justify-between mb-3 pb-3 border-b border-zinc-100">
           <div className="flex items-center gap-2">
-            <FlaskConical className="w-4 h-4 text-purple-600" />
+            <FlaskConical className="w-4 h-4 text-zinc-600" />
             <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-900">
               5. Agressivité chimique (Classe XA)
             </h3>
@@ -503,7 +503,7 @@ export const ElementForm: React.FC<Props> = ({ element, onChange }) => {
               onChange={(e) => updateReponse('concerneParAgressiviteChimique', e.target.checked)}
               className="sr-only peer"
             />
-            <div className="w-9 h-5 bg-zinc-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-zinc-900"></div>
+            <div className="w-9 h-5 bg-zinc-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-zinc-700"></div>
             <span className="ml-2 text-xs font-medium text-zinc-700">
               {element.reponses.concerneParAgressiviteChimique ? 'Exposé' : 'Non agressif'}
             </span>

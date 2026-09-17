@@ -51,10 +51,10 @@ export const TechnicalSvgDiagram: React.FC<Props> = ({ element, resultat }) => {
             </pattern>
             {/* Arrow markers */}
             <marker id="arrow-start" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-              <path d="M 10 0 L 0 5 L 10 10 z" fill="#0284c7" />
+              <path d="M 10 0 L 0 5 L 10 10 z" fill="#3f3f46" />
             </marker>
             <marker id="arrow-end" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="#0284c7" />
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#3f3f46" />
             </marker>
             <marker id="arrow-sub-start" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="5" markerHeight="5" orient="auto">
               <path d="M 10 0 L 0 5 L 10 10 z" fill="#71717a" />
@@ -69,7 +69,7 @@ export const TechnicalSvgDiagram: React.FC<Props> = ({ element, resultat }) => {
           <rect x="40" y="40" width="340" height="200" fill="url(#concreteHatch)" />
 
           {/* Concrete outer face (the exposed face being calculated) */}
-          <line x1="40" y1="30" x2="40" y2="250" stroke="#18181b" strokeWidth="3.5" strokeLinecap="round" />
+          <line x1="40" y1="30" x2="40" y2="250" stroke="#18181b" strokeWidth="3" strokeLinecap="round" />
           <text x="32" y="26" fill="#18181b" fontSize="11" fontWeight="600" textAnchor="start" fontFamily="system-ui">
             Parement exposé ({element.nom})
           </text>
@@ -80,8 +80,7 @@ export const TechnicalSvgDiagram: React.FC<Props> = ({ element, resultat }) => {
           </text>
 
           {/* Theoretical position of bar center and radius */}
-          {/* Base offset = 40 (parement), cnom scaled: let scale = 2.4 px/mm */}
-          {/* Clamped for visual clarity */}
+          {/* Base offset = 40 (parement), cnom scaled */}
           {(() => {
             const pxPerMm = Math.min(2.8, Math.max(1.8, 140 / (cnom + phi)));
             const cnomPx = cnom * pxPerMm;
@@ -102,8 +101,8 @@ export const TechnicalSvgDiagram: React.FC<Props> = ({ element, resultat }) => {
                   height="150"
                   rx="6"
                   fill="none"
-                  stroke="#94a3b8"
-                  strokeWidth="2"
+                  stroke="#a1a1aa"
+                  strokeWidth="1.5"
                   strokeDasharray="4 3"
                 />
 
@@ -112,24 +111,24 @@ export const TechnicalSvgDiagram: React.FC<Props> = ({ element, resultat }) => {
                   cx={barCx}
                   cy={barCy}
                   r={Math.max(12, rPx)}
-                  fill="#09090b"
-                  stroke="#d97706"
-                  strokeWidth="2.5"
+                  fill="#52525b"
+                  stroke="#27272a"
+                  strokeWidth="2"
                 />
                 <circle
                   cx={barCx}
                   cy={barCy}
                   r={Math.max(10, rPx - 2)}
-                  fill="#fef3c7"
-                  opacity="0.25"
+                  fill="#71717a"
+                  opacity="0.3"
                 />
                 {/* Cross mark inside rebar center */}
-                <line x1={barCx - 4} y1={barCy} x2={barCx + 4} y2={barCy} stroke="#d97706" strokeWidth="1" />
-                <line x1={barCx} y1={barCy - 4} x2={barCx} y2={barCy + 4} stroke="#d97706" strokeWidth="1" />
+                <line x1={barCx - 4} y1={barCy} x2={barCx + 4} y2={barCy} stroke="#d4d4d8" strokeWidth="1" />
+                <line x1={barCx} y1={barCy - 4} x2={barCx} y2={barCy + 4} stroke="#d4d4d8" strokeWidth="1" />
 
                 {/* Bar diameter dimension */}
                 <line x1={barCx} y1={barCy - Math.max(12, rPx) - 16} x2={barCx} y2={barCy - Math.max(12, rPx) - 2} stroke="#a1a1aa" strokeWidth="1" />
-                <text x={barCx} y={barCy - Math.max(12, rPx) - 20} fill="#b45309" fontSize="11" fontWeight="600" textAnchor="middle" fontFamily="monospace">
+                <text x={barCx} y={barCy - Math.max(12, rPx) - 20} fill="#3f3f46" fontSize="11" fontWeight="600" textAnchor="middle" fontFamily="monospace">
                   ∅ {phi} mm
                 </text>
 
@@ -138,32 +137,32 @@ export const TechnicalSvgDiagram: React.FC<Props> = ({ element, resultat }) => {
                   cx={barCx + 90}
                   cy={barCy}
                   r={Math.max(12, rPx)}
-                  fill="#27272a"
-                  stroke="#d97706"
-                  strokeWidth="2"
-                  opacity="0.4"
+                  fill="#71717a"
+                  stroke="#52525b"
+                  strokeWidth="1.5"
+                  opacity="0.5"
                 />
 
                 {/* --- DIMENSION LINES --- */}
                 {/* 1. Main cnom dimension (Top dimension line) */}
-                <line x1="40" y1="70" x2="40" y2="45" stroke="#94a3b8" strokeWidth="1" strokeDasharray="2 2" />
-                <line x1={40 + cnomPx} y1={barCy - Math.max(12, rPx)} x2={40 + cnomPx} y2="45" stroke="#94a3b8" strokeWidth="1" strokeDasharray="2 2" />
+                <line x1="40" y1="70" x2="40" y2="45" stroke="#a1a1aa" strokeWidth="1" strokeDasharray="2 2" />
+                <line x1={40 + cnomPx} y1={barCy - Math.max(12, rPx)} x2={40 + cnomPx} y2="45" stroke="#a1a1aa" strokeWidth="1" strokeDasharray="2 2" />
                 
                 <line
                   x1="44"
                   y1="52"
                   x2={40 + cnomPx - 4}
                   y2="52"
-                  stroke="#0284c7"
+                  stroke="#3f3f46"
                   strokeWidth="1.5"
                   markerStart="url(#arrow-start)"
                   markerEnd="url(#arrow-end)"
                 />
-                <rect x={(80 + cnomPx) / 2 - 32} y="38" width="64" height="18" fill="#ffffff" rx="3" stroke="#0284c7" strokeWidth="1" />
+                <rect x={(80 + cnomPx) / 2 - 36} y="38" width="72" height="18" fill="#ffffff" rx="3" stroke="#a1a1aa" strokeWidth="1" />
                 <text
                   x={(80 + cnomPx) / 2}
                   y="51"
-                  fill="#0369a1"
+                  fill="#18181b"
                   fontSize="11"
                   fontWeight="700"
                   textAnchor="middle"
@@ -238,7 +237,7 @@ export const TechnicalSvgDiagram: React.FC<Props> = ({ element, resultat }) => {
                   </text>
 
                   <text x="12" y="70" fill="#71717a" fontSize="10">Classe déterminante :</text>
-                  <text x="123" y="70" fill="#0284c7" fontSize="11" fontWeight="700" textAnchor="end" fontFamily="monospace">
+                  <text x="123" y="70" fill="#18181b" fontSize="11" fontWeight="700" textAnchor="end" fontFamily="monospace">
                     {enrobage.classeDeterminante}
                   </text>
 

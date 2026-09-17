@@ -25,18 +25,18 @@ export const ResultPanel: React.FC<Props> = ({ element, resultat, onOpenDnaModal
   return (
     <div id="result-panel" className="space-y-6">
       {/* 1. PRIMARY RESULT HERO CARD */}
-      <div className="bg-zinc-900 text-white rounded-xl p-6 shadow-md border border-zinc-800">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-5">
+      <div className="bg-white rounded-lg p-6 border border-zinc-200">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-100 pb-5">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400">
-              ENROBAGE NOMINAL REQUIS (EN 1992-1-1 §4.4.1)
+            <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 block">
+              Enrobage nominal requis (EN 1992-1-1 §4.4.1)
             </span>
-            <div className="flex items-baseline gap-3 mt-1">
-              <span className="text-4xl sm:text-5xl font-extrabold font-mono tracking-tight text-white">
+            <div className="flex items-baseline gap-3 mt-1.5">
+              <span className="text-4xl sm:text-5xl font-mono font-bold tracking-tight text-zinc-950">
                 {enrobage.cnom}
               </span>
-              <span className="text-2xl font-mono text-zinc-400 font-semibold">mm</span>
-              <span className="text-xs px-2.5 py-1 rounded bg-sky-950 text-sky-300 border border-sky-800 font-mono font-bold">
+              <span className="text-2xl font-mono text-zinc-400 font-medium">mm</span>
+              <span className="text-xs px-2 py-0.5 rounded bg-zinc-100 text-zinc-700 border border-zinc-200 font-mono font-medium">
                 cnom
               </span>
             </div>
@@ -44,14 +44,14 @@ export const ResultPanel: React.FC<Props> = ({ element, resultat, onOpenDnaModal
 
           <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-2 text-right">
             <div className="flex items-center gap-1.5">
-              <span className="text-xs text-zinc-400">Classe déterminante :</span>
-              <span className="font-mono font-bold text-sm bg-zinc-800 text-sky-300 px-2 py-0.5 rounded border border-zinc-700">
+              <span className="text-xs text-zinc-500">Classe déterminante :</span>
+              <span className="font-mono font-bold text-xs bg-zinc-100 text-zinc-800 px-2 py-0.5 rounded border border-zinc-200">
                 {enrobage.classeDeterminante}
               </span>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="text-xs text-zinc-400">Classe structurale :</span>
-              <span className="font-mono font-bold text-sm bg-zinc-800 text-emerald-300 px-2 py-0.5 rounded border border-zinc-700">
+              <span className="text-xs text-zinc-500">Classe structurale :</span>
+              <span className="font-mono font-bold text-xs bg-zinc-100 text-zinc-800 px-2 py-0.5 rounded border border-zinc-200">
                 S{modificateurs.classeFinale}
               </span>
             </div>
@@ -59,22 +59,22 @@ export const ResultPanel: React.FC<Props> = ({ element, resultat, onOpenDnaModal
         </div>
 
         {/* Breakdown bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 text-xs font-mono">
-          <div className="bg-zinc-800/60 p-2.5 rounded border border-zinc-700/60">
-            <span className="text-zinc-400 text-[10px] block">cmin,b (armature ∅)</span>
-            <span className="text-sm font-bold text-white">{enrobage.cminB} mm</span>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-4 text-xs font-mono">
+          <div className="bg-zinc-50 p-2.5 rounded border border-zinc-200/80">
+            <span className="text-zinc-500 text-[10px] block font-sans">cmin,b (∅ barre)</span>
+            <span className="text-sm font-bold text-zinc-800">{enrobage.cminB} mm</span>
           </div>
-          <div className="bg-zinc-800/60 p-2.5 rounded border border-zinc-700/60">
-            <span className="text-zinc-400 text-[10px] block">cmin,dur ({enrobage.classeDeterminante})</span>
-            <span className="text-sm font-bold text-sky-300">{enrobage.cminDur} mm</span>
+          <div className="bg-zinc-50 p-2.5 rounded border border-zinc-200/80">
+            <span className="text-zinc-500 text-[10px] block font-sans">cmin,dur ({enrobage.classeDeterminante})</span>
+            <span className="text-sm font-bold text-zinc-800">{enrobage.cminDur} mm</span>
           </div>
-          <div className="bg-zinc-800/60 p-2.5 rounded border border-zinc-700/60">
-            <span className="text-zinc-400 text-[10px] block">cmin = max(cmin,b; cmin,dur)</span>
-            <span className="text-sm font-bold text-white">{enrobage.cmin} mm</span>
+          <div className="bg-zinc-50 p-2.5 rounded border border-zinc-200/80">
+            <span className="text-zinc-500 text-[10px] block font-sans">cmin = max(b; dur)</span>
+            <span className="text-sm font-bold text-zinc-900">{enrobage.cmin} mm</span>
           </div>
-          <div className="bg-zinc-800/60 p-2.5 rounded border border-zinc-700/60">
-            <span className="text-zinc-400 text-[10px] block">Δc,dev (tolérance)</span>
-            <span className="text-sm font-bold text-amber-300">+{enrobage.deltaCDev} mm</span>
+          <div className="bg-zinc-50 p-2.5 rounded border border-zinc-200/80">
+            <span className="text-zinc-500 text-[10px] block font-sans">Δc,dev (tolérance)</span>
+            <span className="text-sm font-bold text-zinc-800">+{enrobage.deltaCDev} mm</span>
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@ export const ResultPanel: React.FC<Props> = ({ element, resultat, onOpenDnaModal
           </div>
           <button
             onClick={onOpenDnaModal}
-            className="inline-flex items-center gap-1 text-xs font-medium text-sky-700 hover:text-sky-900 bg-sky-50 px-2.5 py-1 rounded border border-sky-200 transition-colors"
+            className="inline-flex items-center gap-1 text-xs font-medium text-zinc-700 hover:text-zinc-900 bg-zinc-50 hover:bg-zinc-100 px-2.5 py-1 rounded border border-zinc-200 transition-colors"
           >
             <BookOpen className="w-3.5 h-3.5" />
             Voir tableau complet
@@ -104,32 +104,32 @@ export const ResultPanel: React.FC<Props> = ({ element, resultat, onOpenDnaModal
 
         {categorieOptimale ? (
           <div className="space-y-4">
-            <div className="p-4 bg-emerald-50/70 border border-emerald-200 rounded-lg">
+            <div className="p-4 bg-zinc-50/70 border border-zinc-200 rounded-lg">
               <div className="flex items-start justify-between">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-sm font-extrabold bg-emerald-800 text-white px-2.5 py-0.5 rounded">
+                    <span className="font-mono text-xs font-bold bg-zinc-100 text-zinc-900 border border-zinc-300 px-2 py-0.5 rounded">
                       Catégorie {categorieOptimale.code}
                     </span>
-                    <span className="text-xs font-bold text-emerald-900">
+                    <span className="text-xs font-semibold text-zinc-800">
                       Recommandée (optimale pour les classes requises)
                     </span>
                   </div>
-                  <p className="text-xs text-emerald-950 mt-2 leading-relaxed">
+                  <p className="text-xs text-zinc-700 mt-2 leading-relaxed">
                     {categorieOptimale.description}
                   </p>
                 </div>
               </div>
 
-              <div className="mt-3 pt-3 border-t border-emerald-200/80 flex flex-wrap items-center gap-3 text-xs">
-                <span className="font-semibold text-emerald-950">
+              <div className="mt-3 pt-3 border-t border-zinc-200 flex flex-wrap items-center gap-3 text-xs">
+                <span className="font-semibold text-zinc-800">
                   Classes de résistance fck admises :
                 </span>
                 <div className="flex items-center gap-1.5 font-mono font-bold">
                   {fckRecommandees.map((fck) => (
                     <span
                       key={fck}
-                      className="px-2 py-0.5 bg-white text-emerald-900 border border-emerald-300 rounded text-xs"
+                      className="px-2 py-0.5 bg-white text-zinc-800 border border-zinc-300 rounded text-xs"
                     >
                       {fck}
                     </span>
@@ -152,8 +152,8 @@ export const ResultPanel: React.FC<Props> = ({ element, resultat, onOpenDnaModal
             )}
           </div>
         ) : (
-          <div className="p-3 bg-amber-50 border border-amber-200 text-amber-900 rounded-md text-xs flex items-center gap-2">
-            <AlertTriangle className="w-4 h-4 shrink-0 text-amber-700" />
+          <div className="p-3 bg-zinc-50 border border-zinc-300 text-zinc-800 rounded-md text-xs flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 shrink-0 text-zinc-600" />
             <span>Aucune catégorie standard du tableau DNA W.1 ne couvre la combinaison de classes demandée. Une formulation spéciale de béton sur étude doit être prescrite.</span>
           </div>
         )}
@@ -186,7 +186,7 @@ export const ResultPanel: React.FC<Props> = ({ element, resultat, onOpenDnaModal
                   Carbonatation (XC)
                 </td>
                 <td className="py-2.5 px-3 text-center">
-                  <span className="font-mono font-bold px-2 py-0.5 bg-sky-100 text-sky-800 rounded">
+                  <span className="font-mono font-bold px-2 py-0.5 bg-zinc-100 text-zinc-800 border border-zinc-200 rounded">
                     {resultatXC.classe || 'X0'}
                   </span>
                 </td>
@@ -205,7 +205,7 @@ export const ResultPanel: React.FC<Props> = ({ element, resultat, onOpenDnaModal
                 </td>
                 <td className="py-2.5 px-3 text-center">
                   {resultatXD.classe ? (
-                    <span className="font-mono font-bold px-2 py-0.5 bg-amber-100 text-amber-800 rounded">
+                    <span className="font-mono font-bold px-2 py-0.5 bg-zinc-100 text-zinc-800 border border-zinc-200 rounded">
                       {resultatXD.classe}
                     </span>
                   ) : (
@@ -227,7 +227,7 @@ export const ResultPanel: React.FC<Props> = ({ element, resultat, onOpenDnaModal
                 </td>
                 <td className="py-2.5 px-3 text-center">
                   {resultatXF.classe ? (
-                    <span className="font-mono font-bold px-2 py-0.5 bg-cyan-100 text-cyan-800 rounded">
+                    <span className="font-mono font-bold px-2 py-0.5 bg-zinc-100 text-zinc-800 border border-zinc-200 rounded">
                       {resultatXF.classe}
                     </span>
                   ) : (
@@ -249,7 +249,7 @@ export const ResultPanel: React.FC<Props> = ({ element, resultat, onOpenDnaModal
                 </td>
                 <td className="py-2.5 px-3 text-center">
                   {resultatXA.classe ? (
-                    <span className="font-mono font-bold px-2 py-0.5 bg-purple-100 text-purple-800 rounded">
+                    <span className="font-mono font-bold px-2 py-0.5 bg-zinc-100 text-zinc-800 border border-zinc-200 rounded">
                       {resultatXA.classe}
                     </span>
                   ) : (

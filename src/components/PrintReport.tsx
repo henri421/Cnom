@@ -39,7 +39,7 @@ export const PrintReport: React.FC<Props> = ({
           </span>
           <button
             onClick={() => window.print()}
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-zinc-900 hover:bg-zinc-800 rounded-md transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-zinc-800 bg-white hover:bg-zinc-50 border border-zinc-300 rounded-md transition-colors shadow-2xs"
           >
             <Printer className="w-4 h-4" />
             Imprimer / Enregistrer en PDF
@@ -48,7 +48,7 @@ export const PrintReport: React.FC<Props> = ({
       </div>
 
       {/* DOCUMENT HEADER */}
-      <header className="border-b-2 border-zinc-900 pb-6 mb-8">
+      <header className="border-b border-zinc-300 pb-6 mb-8">
         <div className="flex justify-between items-start">
           <div>
             <div className="text-[11px] font-mono tracking-widest text-zinc-500 uppercase font-semibold">

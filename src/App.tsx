@@ -190,7 +190,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-100 text-zinc-900 font-sans flex flex-col antialiased">
+    <div className="min-h-screen bg-[#fafafa] text-zinc-900 font-sans flex flex-col antialiased">
       {/* Top Navbar */}
       <Header
         onOpenDnaModal={() => setIsDnaModalOpen(true)}

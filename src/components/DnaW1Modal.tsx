@@ -48,10 +48,10 @@ export const DnaW1Modal: React.FC<Props> = ({
 
         {/* Content */}
         <div className="p-6 overflow-y-auto space-y-4">
-          <div className="bg-amber-50/60 border border-amber-200 rounded-lg p-3 text-xs text-amber-900 flex items-start gap-2.5">
-            <AlertCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+          <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-700 flex items-start gap-2.5">
+            <AlertCircle className="w-4 h-4 text-zinc-500 shrink-0 mt-0.5" />
             <div>
-              <span className="font-semibold">Note technique d'application :</span> Les catégories de béton du tableau DNA W.1 permettent de prescrire un béton couvrant simultanément plusieurs classes d'exposition selon les pratiques de construction au Luxembourg. Chaque catégorie impose des classes de résistance fck minimales admissibles.
+              <span className="font-semibold text-zinc-900">Note technique d'application :</span> Les catégories de béton du tableau DNA W.1 permettent de prescrire un béton couvrant simultanément plusieurs classes d'exposition selon les pratiques de construction au Luxembourg. Chaque catégorie impose des classes de résistance fck minimales admissibles.
             </div>
           </div>
 
@@ -79,9 +79,9 @@ export const DnaW1Modal: React.FC<Props> = ({
                       key={cat.code}
                       className={`transition-colors ${
                         isSelected
-                          ? 'bg-sky-50/80 font-medium'
+                          ? 'bg-zinc-100 font-medium'
                           : coversAllActive
-                          ? 'bg-emerald-50/40 hover:bg-zinc-50'
+                          ? 'bg-zinc-50/70 hover:bg-zinc-50'
                           : 'hover:bg-zinc-50'
                       }`}
                     >
@@ -100,7 +100,7 @@ export const DnaW1Modal: React.FC<Props> = ({
                                 key={cl}
                                 className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
                                   isReq
-                                    ? 'bg-zinc-900 text-white font-bold'
+                                    ? 'bg-zinc-200 text-zinc-950 font-bold border border-zinc-300'
                                     : 'bg-zinc-100 text-zinc-600'
                                 }`}
                               >
@@ -115,11 +115,11 @@ export const DnaW1Modal: React.FC<Props> = ({
                       </td>
                       <td className="py-3 px-3 align-top text-center">
                         {isSelected ? (
-                          <span className="inline-flex items-center gap-1 text-[11px] font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded-full">
+                          <span className="inline-flex items-center gap-1 text-[11px] font-bold text-zinc-900 bg-zinc-200 border border-zinc-300 px-2 py-0.5 rounded">
                             <CheckCircle2 className="w-3.5 h-3.5" /> Retenue
                           </span>
                         ) : coversAllActive ? (
-                          <span className="inline-flex items-center text-[10px] font-medium text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+                          <span className="inline-flex items-center text-[10px] font-medium text-zinc-700 bg-zinc-100 border border-zinc-200 px-2 py-0.5 rounded">
                             Compatible
                           </span>
                         ) : (
@@ -139,7 +139,7 @@ export const DnaW1Modal: React.FC<Props> = ({
           <span>Source : EN 206 Annexe Nationale Luxembourgeoise (ILNAS)</span>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 bg-zinc-900 text-white rounded-md text-xs font-medium hover:bg-zinc-800 transition-colors"
+            className="px-4 py-1.5 bg-white text-zinc-800 border border-zinc-300 rounded-md text-xs font-medium hover:bg-zinc-50 transition-colors shadow-2xs"
           >
             Fermer
           </button>
