@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-      # Branche de travail : permet la mise en ligne avant la fusion dans main.
-      # A retirer une fois les changements fusionnes.
-      - claude/app-github-online-ginl24
   workflow_dispatch:
 
 permissions:
