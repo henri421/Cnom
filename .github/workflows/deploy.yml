@@ -37,15 +37,12 @@ jobs:
       - name: Verification TypeScript
         run: bun run lint
 
-      - name: Configuration de GitHub Pages
-        id: pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
       - name: Construction du bundle de production
+        # Le site est servi sous https://<compte>.github.io/<depot>/ ; le chemin
+        # de base est donc le nom du depot. Pour un domaine personnalise servant
+        # le site a la racine, remplacer la valeur par '/'.
         env:
-          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+          BASE_PATH: /${{ github.event.repository.name }}/
         run: bun run build
 
       - name: Fallback SPA pour les URL inconnues

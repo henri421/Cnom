@@ -31,8 +31,10 @@ BASE_PATH=/Cnom bun run build && bun run preview
 
 Le workflow `.github/workflows/deploy.yml` construit le projet et le publie sur GitHub Pages
 a chaque push sur `main`, ainsi que manuellement depuis l'onglet Actions (`workflow_dispatch`).
-La source des pages doit etre reglee sur "GitHub Actions" dans Settings > Pages ; le workflow
-tente de l'activer automatiquement.
 
-La variable `BASE_PATH` est deduite du nom du depot par l'action `configure-pages`, ce qui
-permet de servir l'application aussi bien a la racine d'un domaine que dans un sous-repertoire.
+Prerequis unique, a effectuer une seule fois dans l'interface GitHub :
+Settings > Pages > Build and deployment > Source = "GitHub Actions".
+Le jeton d'un workflow ne dispose pas des droits necessaires pour activer Pages lui-meme.
+
+La variable `BASE_PATH` est deduite du nom du depot dans le workflow, ce qui permet de servir
+l'application aussi bien a la racine d'un domaine que dans un sous-repertoire.
