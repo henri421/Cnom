@@ -1,10 +1,12 @@
 // Service Worker for Calcul d'Enrobage PWA
 const CACHE_NAME = 'enrobage-ec2-v1';
+// Chemins relatifs a la portee du service worker : l'application fonctionne
+// aussi bien a la racine d'un domaine que dans un sous-repertoire (GitHub Pages).
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.webmanifest',
-  '/icon.svg'
+  './',
+  './index.html',
+  './manifest.webmanifest',
+  './icon.svg'
 ];
 
 self.addEventListener('install', (event) => {
@@ -66,7 +68,7 @@ self.addEventListener('fetch', (event) => {
         .catch(() => {
           // Fallback to cached index.html for navigation requests
           if (event.request.mode === 'navigate') {
-            return caches.match('/index.html');
+            return caches.match('./index.html');
           }
         });
     })

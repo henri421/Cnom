@@ -1,0 +1,68 @@
+name: Deploiement GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      # Branche de travail : permet la mise en ligne avant la fusion dans main.
+      # A retirer une fois les changements fusionnes.
+      - claude/app-github-online-ginl24
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un seul deploiement concurrent ; les executions en cours ne sont pas annulees.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperation du depot
+        uses: actions/checkout@v4
+
+      - name: Installation de Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Installation des dependances
+        run: bun install --frozen-lockfile
+
+      - name: Verification TypeScript
+        run: bun run lint
+
+      - name: Configuration de GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Construction du bundle de production
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+        run: bun run build
+
+      - name: Fallback SPA pour les URL inconnues
+        run: cp dist/index.html dist/404.html
+
+      - name: Publication de l'artefact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploiement sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

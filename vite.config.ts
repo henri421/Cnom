@@ -3,8 +3,18 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
+// Normalise le chemin de base : toujours encadre par des barres obliques,
+// '/' lorsque le site est servi a la racine du domaine.
+function normalizeBase(value: string | undefined): string {
+  if (!value) return '/';
+  const trimmed = value.replace(/^\/+|\/+$/g, '');
+  return trimmed ? `/${trimmed}/` : '/';
+}
+
 export default defineConfig(() => {
   return {
+    // Chemin de base du site : '/' en local, '/<nom-du-depot>/' sur GitHub Pages.
+    base: normalizeBase(process.env.BASE_PATH),
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
