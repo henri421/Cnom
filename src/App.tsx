@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { ElementBeton, ResultatCalculElement } from './types';
+import { ElementBeton, ResultatCalculElement } from './legacy/types-v1';
 import {
   calculerElementComplet,
   creerElementParDefaut,

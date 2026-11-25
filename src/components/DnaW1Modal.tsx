@@ -1,6 +1,6 @@
 import React from 'react';
 import { DNA_W1_CATEGORIES } from '../engine';
-import { ClasseExposition } from '../types';
+import { ClasseExposition } from '../legacy/types-v1';
 import { X, CheckCircle2, AlertCircle } from 'lucide-react';
 
 interface Props {

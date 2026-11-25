@@ -1,5 +1,5 @@
 import React from 'react';
-import { ElementBeton, TypeElement, AmbianceXC, FrequenceSalage, ZoneGel } from '../types';
+import { ElementBeton, TypeElement, AmbianceXC, FrequenceSalage, ZoneGel } from '../legacy/types-v1';
 import { Settings2, ShieldAlert, CloudRain, Snowflake, FlaskConical, Info } from 'lucide-react';
 
 interface Props {

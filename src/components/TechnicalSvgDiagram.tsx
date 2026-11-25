@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResultatCalculElement, ElementBeton } from '../types';
+import { ResultatCalculElement, ElementBeton } from '../legacy/types-v1';
 
 interface Props {
   element: ElementBeton;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ElementBeton, ResultatCalculElement } from '../types';
+import { ElementBeton, ResultatCalculElement } from '../legacy/types-v1';
 import { Plus, Copy, Trash2, Layers, ShieldCheck, ChevronRight } from 'lucide-react';
 
 interface Props {

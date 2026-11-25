@@ -19,7 +19,7 @@ import {
   ResultatCalculElement,
   ResultatClasse,
   ResultatEnrobage,
-} from './types';
+} from './legacy/types-v1';
 
 // ============================================================================
 // 1. TABLEAU DNA W.1 - CATÉGORIES DE BÉTON (EN 206 ILNAS)
