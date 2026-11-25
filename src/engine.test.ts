@@ -340,3 +340,12 @@ describe('categorie DNA W.1 et classe de resistance', () => {
     expect(r.categorieProposee?.code).toBe('3');
   });
 });
+
+describe('compatibilite de la classe de resistance', () => {
+  it('une classe superieure a celles listees reste compatible', () => {
+    const r = calculerFace(face((f) => (f.classeResistance = 'C30/37')), elem); // categorie 1
+    expect(r.categorieRetenue?.code).toBe('1');
+    expect(r.resistanceCompatible).toBe(true);
+    expect(r.avertissements).toHaveLength(0);
+  });
+});

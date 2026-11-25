@@ -542,10 +542,12 @@ export function calculerFace(
   const classesResistanceCompatibles = categorieRetenue ? classesResistanceCategorie(categorieRetenue) : [];
   let resistanceCompatible: boolean | null = null;
   if (face.classeResistance) {
-    resistanceCompatible = classesResistanceCompatibles.includes(face.classeResistance);
+    // Compatible si la resistance atteint la plus faible classe listee pour la categorie.
+    const fckMin = Math.min(...classesResistanceCompatibles.map(extraireFck));
+    resistanceCompatible = classesResistanceCompatibles.length > 0 && extraireFck(face.classeResistance) >= fckMin;
     if (!resistanceCompatible && categorieRetenue) {
       avertissements.push(
-        `Classe de résistance ${face.classeResistance} hors des classes admises par la catégorie ${categorieRetenue.code} (${classesResistanceCompatibles.join(', ') || 'aucune'}).`
+        `Classe de résistance ${face.classeResistance} inférieure aux classes admises par la catégorie ${categorieRetenue.code} (${classesResistanceCompatibles.join(', ') || 'aucune'}).`
       );
     }
   }

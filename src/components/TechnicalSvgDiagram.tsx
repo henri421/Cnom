@@ -1,20 +1,22 @@
 import React from 'react';
-import { ResultatCalculElement, ElementBeton } from '../legacy/types-v1';
+import { ElementBeton, FaceBeton, ResultatFace } from '../types';
 
 interface Props {
   element: ElementBeton;
-  resultat: ResultatCalculElement;
+  face: FaceBeton;
+  resultat: ResultatFace;
 }
 
-export const TechnicalSvgDiagram: React.FC<Props> = ({ element, resultat }) => {
-  const { enrobage, modificateurs } = resultat;
-  const phi = element.diametreBarreMm;
+export const TechnicalSvgDiagram: React.FC<Props> = ({ element, face, resultat }) => {
+  const enrobage = { ...resultat.enrobage, cnom: resultat.enrobage.cnomRetenu };
+  const modificateurs = { classeFinale: resultat.enrobage.classeStructurale };
+  const phi = resultat.enrobage.diametreEquivalentMm || face.diametreBarreMm;
   const cnom = enrobage.cnom;
   const cminDur = enrobage.cminDur;
   const deltaCdev = enrobage.deltaCDev;
 
   // Visual scaling: scale so cnom + phi fits nicely in viewBox
-  const isDalle = element.typeElement === 'dalle';
+  const isDalle = ['dalle', 'radier', 'balcon'].includes(element.typeElement);
 
   return (
     <div id="technical-diagram-card" className="bg-white border border-zinc-200 rounded-lg p-5">

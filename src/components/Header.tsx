@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Download, FileText, BookOpen, RotateCcw, Smartphone, Check, HardDrive } from 'lucide-react';
+import { FileText, BookOpen, RotateCcw, Smartphone, HardDrive } from 'lucide-react';
+import { LigneTableau } from '../lignes';
+import { ProjetCnom } from '../types';
 
 interface Props {
+  projet: ProjetCnom;
+  lignes: LigneTableau[];
   onOpenDnaModal: () => void;
-  onTogglePrintView: () => void;
-  isPrintView: boolean;
+  onOpenPrintView: () => void;
+  onChargerProjet: (p: ProjetCnom) => void;
   onResetProject: () => void;
-  elementsCount: number;
 }
 
-export const Header: React.FC<Props> = ({
-  onOpenDnaModal,
-  onTogglePrintView,
-  isPrintView,
-  onResetProject,
-  elementsCount,
-}) => {
+export const Header: React.FC<Props> = ({ onOpenDnaModal, onOpenPrintView, onResetProject }) => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstalled, setIsInstalled] = useState(false);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -78,7 +75,7 @@ export const Header: React.FC<Props> = ({
                     Calcul d'Enrobage
                   </h1>
                   <span className="font-mono text-[10px] px-1.5 py-0.5 bg-zinc-100 text-zinc-600 rounded border border-zinc-200 font-semibold">
-                    v1.0 ILNAS
+                    v2.0
                   </span>
                 </div>
                 <p className="text-xs text-zinc-500 font-normal">
@@ -120,21 +117,17 @@ export const Header: React.FC<Props> = ({
 
             {/* Print Note de Calcul */}
             <button
-              onClick={onTogglePrintView}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border transition-colors shadow-2xs ${
-                isPrintView
-                  ? 'bg-zinc-900 text-white border-zinc-900 hover:bg-zinc-800'
-                  : 'bg-white hover:bg-zinc-100 text-zinc-800 border-zinc-200'
-              }`}
+              onClick={onOpenPrintView}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border transition-colors shadow-2xs bg-white hover:bg-zinc-100 text-zinc-800 border-zinc-200"
             >
               <FileText className="w-3.5 h-3.5" />
-              <span>{isPrintView ? 'Retour saisie' : 'Note de calcul'}</span>
+              <span>Rapport PDF</span>
             </button>
 
             {/* Reset / Clean */}
             <button
               onClick={() => {
-                if (window.confirm('Réinitialiser tous les éléments aux valeurs d’exemple par défaut ?')) {
+                if (window.confirm('Remplacer le projet courant par le projet exemple ? Les données non sauvegardées en fichier seront perdues.')) {
                   onResetProject();
                 }
               }}
