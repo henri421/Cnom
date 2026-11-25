@@ -3,7 +3,7 @@ import { ElementBeton, ResultatCalculElement } from './legacy/types-v1';
 import {
   calculerElementComplet,
   creerElementParDefaut,
-} from './engine';
+} from './legacy/engine-v1';
 import { Header } from './components/Header';
 import { ElementList } from './components/ElementList';
 import { ElementForm } from './components/ElementForm';
