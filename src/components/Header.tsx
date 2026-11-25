@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { FileText, BookOpen, RotateCcw, Smartphone, HardDrive } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { FileText, BookOpen, RotateCcw, Smartphone, HardDrive, FileSpreadsheet, FileDown, Save, FolderOpen } from 'lucide-react';
 import { LigneTableau } from '../lignes';
 import { ProjetCnom } from '../types';
+import { nomFichier, telecharger } from '../export/commun';
+import { genererCsv } from '../export/csv';
+import { genererJson, lireJson } from '../export/json';
+
+const boutonBarre =
+  'inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium bg-white hover:bg-zinc-100 text-zinc-700 rounded-md border border-zinc-200 shadow-2xs disabled:opacity-50';
 
 interface Props {
   projet: ProjetCnom;
@@ -12,7 +18,41 @@ interface Props {
   onResetProject: () => void;
 }
 
-export const Header: React.FC<Props> = ({ onOpenDnaModal, onOpenPrintView, onResetProject }) => {
+export const Header: React.FC<Props> = ({
+  projet,
+  lignes,
+  onOpenDnaModal,
+  onOpenPrintView,
+  onChargerProjet,
+  onResetProject,
+}) => {
+  const [exportEnCours, setExportEnCours] = useState(false);
+  const fichierRef = useRef<HTMLInputElement>(null);
+
+  const exporterExcel = async () => {
+    setExportEnCours(true);
+    try {
+      const { exporterExcel: exporter } = await import('../export/excel');
+      await exporter(projet, lignes);
+    } catch (e) {
+      window.alert(`Export Excel impossible : ${(e as Error).message}`);
+    } finally {
+      setExportEnCours(false);
+    }
+  };
+
+  const ouvrirFichier = async (fichier: File | undefined) => {
+    if (!fichier) return;
+    try {
+      const nouveau = lireJson(await fichier.text());
+      if (window.confirm(`Remplacer le projet courant par « ${nouveau.titre} » (${nouveau.elements.length} élément(s)) ?`)) {
+        onChargerProjet(nouveau);
+      }
+    } catch (e) {
+      window.alert((e as Error).message);
+    }
+  };
+
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstalled, setIsInstalled] = useState(false);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -114,6 +154,41 @@ export const Header: React.FC<Props> = ({ onOpenDnaModal, onOpenPrintView, onRes
               <BookOpen className="w-3.5 h-3.5 text-zinc-500" />
               <span className="hidden sm:inline">Tableau</span> DNA W.1
             </button>
+
+            <button onClick={exporterExcel} disabled={exportEnCours} className={boutonBarre} title="Classeur .xlsx : synthèse, justification, paramètres nationaux">
+              <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-700" />
+              {exportEnCours ? 'Export…' : 'Exporter en Excel'}
+            </button>
+            <button
+              onClick={() => telecharger(genererCsv(lignes), nomFichier(projet, 'csv'), 'text/csv;charset=utf-8')}
+              className={boutonBarre}
+              title="CSV point-virgule, UTF-8 avec BOM (Excel francophone)"
+            >
+              <FileDown className="w-3.5 h-3.5" />
+              CSV
+            </button>
+            <button
+              onClick={() => telecharger(genererJson(projet), nomFichier(projet, 'json'), 'application/json')}
+              className={boutonBarre}
+              title="Sauvegarder le projet dans un fichier JSON local"
+            >
+              <Save className="w-3.5 h-3.5" />
+              <span className="hidden lg:inline">Sauvegarder</span>
+            </button>
+            <button onClick={() => fichierRef.current?.click()} className={boutonBarre} title="Ouvrir un projet JSON (v1 ou v2)">
+              <FolderOpen className="w-3.5 h-3.5" />
+              <span className="hidden lg:inline">Ouvrir</span>
+            </button>
+            <input
+              ref={fichierRef}
+              type="file"
+              accept=".json,application/json"
+              className="hidden"
+              onChange={(e) => {
+                ouvrirFichier(e.target.files?.[0]);
+                e.target.value = '';
+              }}
+            />
 
             {/* Print Note de Calcul */}
             <button
