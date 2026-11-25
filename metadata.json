@@ -1,6 +1,0 @@
-{
-  "name": "Calcul d'Enrobage - EC2 & ILNAS",
-  "description": "Application PWA locale de détermination des classes d'exposition, catégorie de béton (DNA W.1) et calcul d'enrobage nominal selon EN 1992-1-1 et EN 206.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

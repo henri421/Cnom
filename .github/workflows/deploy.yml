@@ -34,6 +34,9 @@ jobs:
       - name: Verification TypeScript
         run: bun run lint
 
+      - name: Tests unitaires (Vitest)
+        run: bun run test
+
       - name: Construction du bundle de production
         # Le site est servi sous https://<compte>.github.io/<depot>/ ; le chemin
         # de base est donc le nom du depot. Pour un domaine personnalise servant
