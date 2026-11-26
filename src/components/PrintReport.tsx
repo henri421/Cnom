@@ -1,5 +1,4 @@
 import React from 'react';
-import { ArrowLeft, Printer } from 'lucide-react';
 import { COLONNES_SYNTHESE, LigneTableau, libelleFace, titreColonne } from '../lignes';
 import { libelleType } from '../libelles';
 import { parametres } from '../parametres-nationaux';
@@ -18,74 +17,52 @@ export const PrintReport: React.FC<Props> = ({ projet, lignes, onClose }) => {
     : '';
 
   return (
-    <div className="bg-white min-h-screen py-8 px-4 sm:px-8 max-w-6xl mx-auto text-zinc-900 font-sans print:p-0 print:m-0 print:max-w-none">
-      <div className="flex items-center justify-between pb-6 mb-6 border-b border-zinc-200 print:hidden">
-        <button
-          onClick={onClose}
-          className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-zinc-700 bg-zinc-100 hover:bg-zinc-200 rounded-md"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Retour au tableau
+    <div className="rapport">
+      <div className="outils">
+        <button type="button" onClick={onClose}>
+          ← Retour au tableau
         </button>
-        <button
-          onClick={() => window.print()}
-          className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold bg-white hover:bg-zinc-50 border border-zinc-300 rounded-md"
-        >
-          <Printer className="w-4 h-4" />
+        <button type="button" onClick={() => window.print()}>
           Imprimer / enregistrer en PDF
         </button>
       </div>
 
-      <header className="border-b border-zinc-300 pb-4 mb-6">
-        <div className="flex justify-between items-start gap-6">
-          <div>
-            <div className="text-[11px] font-mono tracking-widest text-zinc-500 uppercase font-semibold">
-              Note de calcul : classes d’exposition et enrobage
-            </div>
-            <h1 className="text-2xl font-extrabold tracking-tight text-zinc-950 mt-1">{projet.titre}</h1>
-          </div>
-          <div className="text-right text-xs space-y-0.5 font-mono">
-            {projet.referenceProjet && <div>Référence : {projet.referenceProjet}</div>}
-            {projet.auteur && <div>Auteur : {projet.auteur}</div>}
-            {date && <div>Date : {date}</div>}
-          </div>
+      <header className="cartouche">
+        <div>
+          <p className="sous-titre" style={{ margin: 0 }}>
+            Note de calcul : classes d’exposition et enrobage
+          </p>
+          <h1>{projet.titre}</h1>
         </div>
-        <div className="mt-3 p-2 bg-zinc-50 border border-zinc-200 rounded text-[11px] text-zinc-700 grid grid-cols-1 sm:grid-cols-3 gap-2">
-          <div>
-            <span className="font-semibold block text-zinc-900">Enrobage</span>EN 1992-1-1:2004+A1:2014, 4.4.1
-          </div>
-          <div>
-            <span className="font-semibold block text-zinc-900">Béton</span>EN 206 et tableau DNA W.1 (ILNAS)
-          </div>
-          <div>
-            <span className="font-semibold block text-zinc-900">Paramètres nationaux</span>
-            {p.libelle}
-          </div>
+        <div className="note" style={{ margin: 0, textAlign: 'right' }}>
+          {projet.referenceProjet && <div>Référence : {projet.referenceProjet}</div>}
+          {projet.auteur && <div>Auteur : {projet.auteur}</div>}
+          {date && <div>Date : {date}</div>}
         </div>
       </header>
 
-      <section className="mb-8">
-        <h2 className="text-sm font-bold uppercase tracking-wider mb-2">1. Tableau de synthèse</h2>
-        <table className="w-full text-left text-[10px] border-collapse border border-zinc-300">
+      <p className="note">
+        Enrobage : EN 1992-1-1:2004+A1:2014, 4.4.1. Béton : EN 206 et tableau DNA W.1 (ILNAS). Paramètres nationaux :{' '}
+        {p.libelle}.
+      </p>
+
+      <h2>1. Tableau de synthèse</h2>
+      <div className="defilement">
+        <table className="projet">
           <thead>
-            <tr className="bg-zinc-100">
+            <tr>
               {COLONNES_SYNTHESE.map((c) => (
-                <th key={c.cle} className={`py-1.5 px-1.5 border border-zinc-300 ${c.unite ? 'text-right' : ''}`}>
+                <th key={c.cle} className={c.unite ? 'num' : ''}>
                   {titreColonne(c)}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {lignes.map((l, i) => (
-              <tr key={l.face.id} className={i % 2 ? 'bg-zinc-50' : ''}>
+            {lignes.map((l) => (
+              <tr key={l.face.id} className="ligne">
                 {COLONNES_SYNTHESE.map((c) => (
-                  <td
-                    key={c.cle}
-                    className={`py-1 px-1.5 border border-zinc-200 ${c.unite ? 'text-right font-mono' : ''} ${
-                      c.cle === 'cnom' ? 'font-bold bg-zinc-100' : ''
-                    }`}
-                  >
+                  <td key={c.cle} className={`${c.unite ? 'num' : ''}${c.cle === 'cnom' ? ' cnom' : ''}`}>
                     {c.valeur(l)}
                   </td>
                 ))}
@@ -93,41 +70,43 @@ export const PrintReport: React.FC<Props> = ({ projet, lignes, onClose }) => {
             ))}
           </tbody>
         </table>
-      </section>
+      </div>
 
-      <section className="space-y-5">
-        <h2 className="text-sm font-bold uppercase tracking-wider">2. Justification par ligne</h2>
-        {lignes.map((l, i) => (
-          <article key={l.face.id} className="border border-zinc-300 rounded p-3 break-inside-avoid">
-            <div className="flex justify-between items-baseline border-b border-zinc-200 pb-1 mb-2">
-              <h3 className="text-xs font-bold">
-                {i + 1}. {l.element.nom} : {libelleFace(l.face)}{' '}
-                <span className="font-normal text-zinc-500">({libelleType(l.element)})</span>
-              </h3>
-              <span className="text-sm font-mono font-extrabold">cnom = {l.resultat.enrobage.cnomRetenu} mm</span>
-            </div>
-            {l.resultat.cheminement.map((etape) => (
-              <div key={etape.titre} className="mb-1.5">
-                <div className="text-[10px] font-semibold">
-                  {etape.titre} <span className="font-mono font-normal text-zinc-500">[{etape.reference}]</span>
-                </div>
+      <h2>2. Justification par ligne</h2>
+      {lignes.map((l, i) => (
+        <article key={l.face.id}>
+          <div className="entete-cadre">
+            <h3 style={{ margin: 0 }}>
+              {i + 1}. {l.element.nom} : {libelleFace(l.face)} <span className="clause">{libelleType(l.element)}</span>
+            </h3>
+            <span className="mono" style={{ fontWeight: 600 }}>
+              cnom = {l.resultat.enrobage.cnomRetenu} mm
+            </span>
+          </div>
+          {l.resultat.cheminement.map((etape) => (
+            <div key={etape.titre}>
+              <div className="etape-titre">
+                {etape.titre} <span className="clause">{etape.reference}</span>
+              </div>
+              <ul style={{ margin: '0.1rem 0 0.4rem', paddingLeft: '1.2rem' }}>
                 {etape.lignes.map((t, j) => (
-                  <div key={j} className="text-[10px] text-zinc-700 pl-3">
-                    {t}
-                  </div>
+                  <li key={j}>{t}</li>
                 ))}
-              </div>
-            ))}
-            {l.resultat.avertissements.length > 0 && (
-              <div className="mt-1 text-[10px] text-amber-800">
+              </ul>
+            </div>
+          ))}
+          {l.resultat.avertissements.length > 0 && (
+            <div className="verdict alerte">
+              {l.resultat.avertissements.length} avertissement(s)
+              <div className="detail">
                 {l.resultat.avertissements.map((a, j) => (
-                  <div key={j}>Avertissement : {a}</div>
+                  <div key={j}>{a}</div>
                 ))}
               </div>
-            )}
-          </article>
-        ))}
-      </section>
+            </div>
+          )}
+        </article>
+      ))}
     </div>
   );
 };

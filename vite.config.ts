@@ -1,4 +1,3 @@
-import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
@@ -18,7 +17,6 @@ export default defineConfig(() => {
     base: normalizeBase(process.env.BASE_PATH),
     plugins: [
       react(),
-      tailwindcss(),
       // Service worker genere au build : toutes les ressources du bundle (y compris
       // le module ExcelJS charge a la demande) sont mises en cache des la premiere
       // visite, ce qui rend l'application utilisable hors ligne ensuite.

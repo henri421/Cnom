@@ -9,7 +9,6 @@ import { ProjectTable } from './components/ProjectTable';
 import { FaceForm } from './components/FaceForm';
 import { ResultPanel } from './components/ResultPanel';
 import { PrintReport } from './components/PrintReport';
-import { DnaW1Modal } from './components/DnaW1Modal';
 import { LigneTableau, Selection } from './lignes';
 
 function premiereSelection(elements: ElementBeton[]): Selection | null {
@@ -30,7 +29,6 @@ export default function App() {
     () => chargerDepuisStockage(localStorage) ?? creerProjetExemple()
   );
   const [selection, setSelection] = useState<Selection | null>(() => premiereSelection(projet.elements));
-  const [isDnaModalOpen, setIsDnaModalOpen] = useState(false);
   const [isPrintView, setIsPrintView] = useState(false);
 
   useEffect(() => {
@@ -183,18 +181,16 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#fafafa] text-zinc-900 font-sans flex flex-col antialiased">
-      <Header
-        projet={projet}
-        lignes={lignes}
-        onOpenDnaModal={() => setIsDnaModalOpen(true)}
-        onOpenPrintView={() => setIsPrintView(true)}
-        onChargerProjet={remplacerProjet}
-        onResetProject={() => remplacerProjet(creerProjetExemple())}
-      />
+    <>
+      <Header projet={projet} />
 
-      <main className="flex-1 max-w-[1500px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-        <ProjectInfo projet={projet} onChange={setProjet} />
+      <main className="page">
+        <ProjectInfo
+          projet={projet}
+          onChange={setProjet}
+          onChargerProjet={remplacerProjet}
+          onExemple={() => remplacerProjet(creerProjetExemple())}
+        />
 
         <ProjectTable
           lignes={lignes}
@@ -214,8 +210,8 @@ export default function App() {
         />
 
         {ligneActive ? (
-          <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
-            <div className="xl:col-span-7">
+          <div className="travail">
+            <div className="colonne">
               <FaceForm
                 element={ligneActive.element}
                 face={ligneActive.face}
@@ -225,35 +221,26 @@ export default function App() {
                 onChangeFace={(f) => majFace(ligneActive.element.id, f)}
               />
             </div>
-            <div className="xl:col-span-5 xl:sticky xl:top-20">
+            <div className="colonne">
               <ResultPanel
+                projet={projet}
+                lignes={lignes}
                 element={ligneActive.element}
                 face={ligneActive.face}
                 resultat={ligneActive.resultat}
-                onOpenDnaModal={() => setIsDnaModalOpen(true)}
+                onOpenPrintView={() => setIsPrintView(true)}
               />
             </div>
           </div>
         ) : (
-          <p className="text-sm text-zinc-500">Aucune ligne sélectionnée. Ajoutez un élément pour commencer.</p>
+          <div className="attente">Aucune ligne sélectionnée. Ajoutez un élément pour commencer.</div>
         )}
       </main>
 
-      <DnaW1Modal
-        isOpen={isDnaModalOpen}
-        onClose={() => setIsDnaModalOpen(false)}
-        activeClasses={ligneActive?.resultat.classesExposition}
-        selectedCategoryCode={ligneActive?.resultat.categorieRetenue?.code}
-      />
-
-      <footer className="bg-white border-t border-zinc-200 mt-12 py-4 text-center text-xs text-zinc-500 print:hidden">
-        <div className="max-w-[1500px] mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>Enrobage nominal : EN 1992-1-1 (4.4.1) et EN 206 (annexe ILNAS, tableau DNA W.1)</span>
-          <span className="font-mono text-[11px] text-zinc-400">
-            Calcul local dans le navigateur, aucune donnée transmise
-          </span>
-        </div>
+      <footer className="page">
+        Enrobage nominal : EN 1992-1-1 (4.4.1) et EN 206 (annexe ILNAS, tableau DNA W.1). Calcul local dans le
+        navigateur, aucune donnée transmise.
       </footer>
-    </div>
+    </>
   );
 }
